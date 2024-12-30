@@ -50,22 +50,40 @@ void playerMove() {
     int x;
     int y;
 
-    do {
+    while (1) {
         printf("Enter row #(1-3): ");
-        scanf("%d", &x);
-        x--;
+    
+        // look for invalid inputs
+        if (scanf("%d", &x) != 1 || x < 1 || x > 3) {
+            printf("Invalid input! Please enter a number between 1 and 3.\n");
+
+            // clear the scanf buffer
+            while (getchar() != '\n');
+            continue;
+        }
 
         printf("Enter column #(1-3): ");
-        scanf("%d", &y);
+
+        // look for invalid inputs
+        if (scanf("%d", &y) != 1 || y < 1 || y > 3) {
+            printf("Invalid input! Please enter a number between 1 and 3.\n");
+
+            // clear the scanf buffer
+            while (getchar() != '\n');
+            continue;
+        }
+
+        // make 1 to 0, 2 to 1 and 3 to 2
+        x--;
         y--;
 
         if (board[x][y] != ' ') {
-            printf("Invalid move!\n");
+            printf("Invalid move! The cell is already taken.\n");
         } else {
             board[x][y] = PLAYER;
             break;
         }
-    } while (board[x][y] != ' ');
+    }
 }
 
 void computerMove() {
@@ -144,7 +162,7 @@ int main () {
         printBoard();
         printWinner(winner);    
 
-        printf("\n Would you like to play again? (y/n): ");
+        printf("\nWould you like to play again? (y/n): ");
         scanf(" %c", &response);
         response = tolower(response);
     } while (response == 'y');
