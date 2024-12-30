@@ -72,6 +72,7 @@ void computerMove() {
 
     // create a seed based on current time
     srand(time(0));
+    
     int x;
     int y;
 
@@ -144,8 +145,7 @@ int main () {
         printWinner(winner);    
 
         printf("\n Would you like to play again? (y/n): ");
-        scanf("%c");
-        scanf("%c", &response);
+        scanf(" %c", &response);
         response = tolower(response);
     } while (response == 'y');
 
